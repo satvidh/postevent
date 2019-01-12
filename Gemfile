@@ -5,7 +5,7 @@ gem 'rails', '3.2.21' # was 3.2.5
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '0.3.18'
 gem 'json'
 gem 'multi_json', '1.3.6'
 gem 'bcrypt-ruby', '3.0.0'

@@ -73,4 +73,5 @@ Postevent::Application.configure do
   config.linkedin_consumer_key = nil
   config.linkedin_consumer_secret = nil
   config.linkedin_group_id = nil
+  config.eager_load = false
 end

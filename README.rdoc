@@ -262,3 +262,5 @@ vendor
 
 # Latest development observations
 * Should we upgrade Rails?
+* https://www.thegreatcodeadventure.com/making-a-rails-api-with-grap/
+	* https://github.com/ruby-grape/grape-on-rails

@@ -4,7 +4,6 @@ require 'securerandom'
 
 module Slack
 	class Commands < Grape::API
-		include ActionView::Helpers::UrlHelper
 		resource :hello do
 			params do
         		requires :trigger_id, type: String, desc: 'Trigger ID.'
@@ -43,14 +42,14 @@ module Slack
 					user_name = params[:user_name]
 					# Associate the slack user id with a nonce.
 					association_nonce = SecureRandom.hex()
-					association = Association.new(:user_id => user_id, :nonce => association_nonce)
+					association = Association.new(:user_id => user_id, :nonce => association_nonce, :expired => false)
 					association.save
 					# Get the URL to return to the user
 					# association_link = Commands.link_to("Click Here", controller: 'associations', action: 'slack', nonce: association.nonce)
 					# association_link = "https://#{request.host_with_port}/associations/slack?nonce=#{association.nonce}"
 					association_link = "https://#{request.host_with_port}/logout?nonce=#{association.nonce}"
 					client.chat_postEphemeral(channel: channel_id,
-											  text: "You (#{user_name}) are not authorized for this command. Click on #{association_link} to authorize.",
+											  text: "You (#{user_name}) are not authorized for this command. link expired=#{association.expired}. Click on #{association_link} to authorize.",
 											  user: user_id)
 				end
 			end

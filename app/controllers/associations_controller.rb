@@ -5,8 +5,10 @@ class AssociationsController < ApplicationController
 
 	def slack
 		nonce = params[:nonce]
+		session[:nonce] = nil
 		association = Association.find_by_nonce(nonce)
-		if association
+		if association && !association.expired
+			association.update_attributes({:expired => true})
 			@user = current_user
 			@user.update_attributes({:slack_user_id => association.user_id})
 			client = Slack::Web::Client.new(token: ENV['SLACK_API_TOKEN'])
@@ -15,7 +17,7 @@ class AssociationsController < ApplicationController
 									text: "You are now authorized to post events from slack.",
 									as_user: true)
 		else
-			client.chat_postMessage(channel: "PostEvent", text: "Could not authorize user.", as_user: false)
+			client.chat_postMessage(channel: "PostEvent", text: "Link invalid or already used once.", as_user: false)
 		end
 	end
 end

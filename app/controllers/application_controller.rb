@@ -1,12 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_timezone
-   
-private
 
-  def set_timezone
-    Time.zone = Rails.configuration.timezone
-  end
+protected
 
   def login_required
     if !current_user
@@ -17,7 +13,14 @@ private
       end
     end
   end
-  
+
+
+private
+
+  def set_timezone
+    Time.zone = Rails.configuration.timezone
+  end
+
   def create_user
     redirect_to :new_user    
   end

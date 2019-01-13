@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20190112224002) do
   create_table "associations", :force => true do |t|
     t.string   "user_id"
     t.string   "nonce"
+    t.boolean  "expired"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -23,11 +23,20 @@ class SessionsController < ApplicationController
   def destroy
   	logger.debug("destroy called with nonce=#{params[:nonce]}")
   	nonce = params[:nonce]
-    session[:user_id] = nil
     if nonce
+		association = Association.find_by_nonce(nonce)
+		logger.info("Association=#{association}")
+		if !association || association.expired
+			render "expired"
+			return
+		end
+	end
+
+    session[:user_id] = nil
+	if nonce
     	session[:nonce] = nonce
     	flash[:notice] = "Log in to associate slack user!"
-    	render "new"
+    	login_required
     else
     	redirect_to root_url, :notice => "Logged out!"
     end

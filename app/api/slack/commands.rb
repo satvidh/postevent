@@ -47,7 +47,8 @@ module Slack
 					association.save
 					# Get the URL to return to the user
 					# association_link = Commands.link_to("Click Here", controller: 'associations', action: 'slack', nonce: association.nonce)
-					association_link = "https://#{request.host_with_port}/associations/slack?nonce=#{association.nonce}"
+					# association_link = "https://#{request.host_with_port}/associations/slack?nonce=#{association.nonce}"
+					association_link = "https://#{request.host_with_port}/logout?nonce=#{association.nonce}"
 					client.chat_postEphemeral(channel: channel_id,
 											  text: "You (#{user_name}) are not authorized for this command. Click on #{association_link} to authorize.",
 											  user: user_id)

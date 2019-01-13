@@ -12,6 +12,8 @@ Postevent::Application.routes.draw do
   match 'authorize', :to => 'users#authorize', :as => "authorize"
   match 'accept', :to => 'users#accept', :as => "accept"
 
+  match 'associations/slack', :controller => 'associations', :action => 'slack'
+
   mount API => '/'
 
   # The priority is based upon order of creation:

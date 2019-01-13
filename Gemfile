@@ -21,6 +21,9 @@ gem 'therubyracer'
 gem 'thin'
 gem 'slack-ruby-client', '~> 0.13.1'
 
+# For nonce
+gem 'openid'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

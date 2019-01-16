@@ -1,11 +1,6 @@
 class Associations < ActiveRecord::Base
-  attr_accessible :user_id, :nonce, :timestamp
-  has_secure_password
-  validates :email, :presence => true, :uniqueness => true, :length => {:maximum => 255}
-  validates :password, :length => {:maximum => 255}
-  validates_presence_of :password, :on => :create
-
-  def authorized_for_linkedin
-    linkedin_token_expiration != nil && linkedin_token_expiration > DateTime.now
-  end
+  attr_accessible :user_id, :nonce, :nonce_expiration_time
+  validates :user_id, :presence => true
+  validates :nonce, :presence => true, :uniqueness => true
+  validates :nonce_expiration_time, :presence => true
 end

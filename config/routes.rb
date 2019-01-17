@@ -12,9 +12,10 @@ Postevent::Application.routes.draw do
   match 'authorize', :to => 'users#authorize', :as => "authorize"
   match 'accept', :to => 'users#accept', :as => "accept"
 
-  match 'session/get_post_link', :to => 'sessions#get_post_link'
   match 'session/connect/slack', :to => 'sessions#connect_slack'
-  
+
+  mount API => '/'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -19,7 +19,6 @@ gem 'linkedin-oauth2'
 gem 'execjs'
 gem 'therubyracer'
 gem 'thin'
-gem 'slack-ruby-client', '~> 0.13.1'
 
 # For nonce
 gem 'openid'

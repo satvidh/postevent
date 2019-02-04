@@ -16,11 +16,7 @@ module Slack
                 association.save
                 # Check if user is already associated
                 user = User.find_by_slack_user_id(slack_user_id)
-<<<<<<< HEAD
                 link = "#{request.scheme}://#{request.host_with_port}/session/connect/slack?nonce=#{association.nonce}"
-=======
-                link = "https://#{request.host_with_port}/session/connect/slack?nonce=#{association.nonce}"
->>>>>>> a4799dc3721ea7a6b44cd9ddde66bdc034a251e5
                 if not user
                     attachments = [
                         {

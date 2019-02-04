@@ -57,7 +57,10 @@ class SessionsController < ApplicationController
           remove_nonce
         else
           association.update_attributes(:nonce_expiration_time => Time.now)
+<<<<<<< HEAD
           session[:user_id] = user.id
+=======
+>>>>>>> a4799dc3721ea7a6b44cd9ddde66bdc034a251e5
           logger.debug("Redirect to root with user_id #{session[:user_id]}")
           redirect_to :controller => "events", :action => "new"
         end

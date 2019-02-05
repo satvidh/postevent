@@ -1,3 +1,5 @@
+require 'logger'
+
 class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :sig
@@ -18,9 +20,12 @@ class Event < ActiveRecord::Base
   validate :validate_date
   
   def initialize(attributes={})
-    date_hack(attributes, "date")
-    time_hack(attributes, "start")
-    time_hack(attributes, "end")
+    date_time_attributes_hack(attributes)
+    super(attributes)
+  end
+
+  def update_attributes(attributes={})
+    date_time_attributes_hack(attributes)
     super(attributes)
   end
 
@@ -68,5 +73,13 @@ class Event < ActiveRecord::Base
   
   def validate_date
     errors.add("Date", "must be in future.") unless date.future?
+  end
+
+private
+
+  def date_time_attributes_hack(attributes)
+    date_hack(attributes, "date")
+    time_hack(attributes, "start")
+    time_hack(attributes, "end")
   end
 end
